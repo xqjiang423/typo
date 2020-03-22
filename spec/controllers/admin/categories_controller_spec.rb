@@ -32,6 +32,13 @@ describe Admin::CategoriesController do
       assert assigns(:category).valid?
       assigns(:categories).should_not be_nil
     end
+    
+    it 'should create a new category' do
+      post :edit, :category => {:name => "newname", :keywords => "newkeyword", :permalink => "JXQ", :description => "meself"}
+      assert_response :redirect, :action => "index"
+      assigns(:categories).should_not be_nil
+      expect(flash[:notice]).to eq("Category was successfully saved.")
+    end
   end
 
   it "test_update" do
